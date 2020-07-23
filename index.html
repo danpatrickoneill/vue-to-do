@@ -63,7 +63,6 @@
           </li>
         </ul>
       </section>
-      <!-- Again, will probably get rid of this class -->
       <footer class="footer" v-show="todos.length" v-cloak>
         <span class="todo-count">
           <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
@@ -94,5 +93,10 @@
         </button>
       </footer>
     </section>
+    <footer class="info">
+      <p>Double-click a todo to edit</p>
+      <p>Written by <a href="http://evanyou.me">Evan You</a></p>
+      <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+    </footer>
   </body>
 </html>
