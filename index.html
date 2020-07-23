@@ -14,5 +14,18 @@
       }
     </style>
   </head>
-  <body></body>
+  <body>
+    <section class="todoapp">
+      <!-- Class here probably isn't necessary -->
+      <header class="header">
+        <h1>Todos</h1>
+        <input
+          id="toggle-all"
+          class="toggle-all"
+          type="checkbox"
+          v-model="allDone"
+        />
+      </header>
+    </section>
+  </body>
 </html>
