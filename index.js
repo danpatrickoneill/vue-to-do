@@ -16,3 +16,10 @@ const todoStorage = {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
   },
 };
+
+// Object for visibility filters
+const filters = {
+  all: (todos) => todos,
+  active: (todos) => todos.filter((todo) => !todo.completed),
+  completed: (todos) => todos.filter((todo) => todo.completed),
+};
