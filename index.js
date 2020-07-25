@@ -67,4 +67,50 @@ const app = new Vue({
   filters: {
     pluralize: (n) => (n === 1 ? 'item' : 'items'),
   },
+
+  // Data logic methods
+  methods: {
+    addTodo: function () {
+      const value = this.newTodo && this.newTodo.trim();
+      if (!value) {
+        return;
+      }
+      this.todos.push({
+        id: todoStorage.uid++,
+        title: value,
+        completed: false,
+      });
+      this.newTodo = '';
+    },
+
+    removeTodo: function (todo) {
+      this.todos.splice(this.todos.indexOf(todo), 1);
+    },
+
+    editTodo: function (todo) {
+      this.beforeEditCache = todo.title;
+      this.editedTodo = todo;
+    },
+
+    doneEdit: function (todo) {
+      if (!this.editedTodo) {
+        return;
+      }
+      this.editedTodo = null;
+      todo.title = todo.title.trim();
+      // Original spec has this as a delete; I think cancel is the better option
+      if (!todo.title) {
+        this.cancelEdit(todo);
+      }
+    },
+
+    cancelEdit: function (todo) {
+      this.editedTodo = null;
+      todo.title = this.beforeEditCache;
+    },
+
+    removeCompleted: function () {
+      this.todos = filters.active(this.todos);
+    },
+  },
 });
