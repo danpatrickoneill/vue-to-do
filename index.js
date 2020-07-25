@@ -113,4 +113,14 @@ const app = new Vue({
       this.todos = filters.active(this.todos);
     },
   },
+
+  // A custom directive to wait for DOM to update on edit
+  // before focusing on input field
+  directives: {
+    'todo-focus': function (e, binding) {
+      if (binding.value) {
+        e.focus();
+      }
+    },
+  },
 });
