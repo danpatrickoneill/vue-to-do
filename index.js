@@ -1,6 +1,6 @@
 // Full spec-compliant TodoMVC with localStorage persistence
 // and hash-based routing in ~120 effective lines of JavaScript.
-import Vue from 'vue';
+// import Vue from 'vue';
 
 // Setup for local storage persistence
 const STORAGE_KEY = 'todos-vusje-2.0';
@@ -27,6 +27,7 @@ const filters = {
 
 // Setup for Vue instance
 const app = new Vue({
+  el: '#todoapp',
   // Initial state
   data: {
     todos: todoStorage.fetch(),
@@ -139,4 +140,4 @@ function onHashChange() {
 window.addEventListener('hashchange', onHashChange);
 onHashChange();
 
-app.$mount('.todoapp');
+// app.$mount('.todoapp');
