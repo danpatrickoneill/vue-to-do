@@ -1,6 +1,6 @@
 // Full spec-compliant TodoMVC with localStorage persistence
 // and hash-based routing in ~120 effective lines of JavaScript.
-import Vue from 'vue';
+// import Vue from 'vue';
 
 // Setup for local storage persistence
 const STORAGE_KEY = 'todos-vusje-2.0';
@@ -27,6 +27,7 @@ const filters = {
 
 // Setup for Vue instance
 const app = new Vue({
+  el: '#todoapp',
   // Initial state
   data: {
     todos: todoStorage.fetch(),
@@ -113,4 +114,30 @@ const app = new Vue({
       this.todos = filters.active(this.todos);
     },
   },
+
+  // A custom directive to wait for DOM to update on edit
+  // before focusing on input field
+  directives: {
+    'todo-focus': function (e, binding) {
+      if (binding.value) {
+        e.focus();
+      }
+    },
+  },
 });
+
+// Routing handler
+function onHashChange() {
+  const visibility = window.location.hash.replace(/#\/?/, '');
+  if (filters[visibility]) {
+    app.visibility = visibility;
+  } else {
+    window.location.hash = '';
+    app.visibility = 'all';
+  }
+}
+
+window.addEventListener('hashchange', onHashChange);
+onHashChange();
+
+// app.$mount('.todoapp');
