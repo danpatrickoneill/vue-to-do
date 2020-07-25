@@ -124,3 +124,19 @@ const app = new Vue({
     },
   },
 });
+
+// Routing handler
+function onHashChange() {
+  const visibility = window.location.hash.replace(/#\/?/, '');
+  if (filters[visibility]) {
+    app.visibility = visibility;
+  } else {
+    window.location.hash = '';
+    app.visibility = 'all';
+  }
+}
+
+window.addEventListener('hashchange', onHashChange);
+onHashChange();
+
+app.$mount('.todoapp');
